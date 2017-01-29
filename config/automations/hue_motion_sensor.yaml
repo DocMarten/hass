@@ -1,7 +1,7 @@
 - alias: hue_sensor
   trigger:
     - platform: mqtt
-      topic: motionsensor_3_companion
+      topic: hue/motionsensor_3_companion/status
       payload: '1'
   condition:
     - condition: state
@@ -19,7 +19,7 @@
 - alias: hue_sensor
   trigger:
     - platform: mqtt
-      topic: motionsensor_3_companion
+      topic: hue/motionsensor_3_companion/status
       payload: '0'
   condition:
     - condition: state
