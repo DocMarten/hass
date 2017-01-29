@@ -1,4 +1,17 @@
-- alias: hue_sensor
+- alias: hue_sensor_on_gallerie
+  trigger:
+    - platform: mqtt
+      topic: hue/motionsensor_3_companion/status
+      payload: '1'
+  condition:
+    - condition: state
+      entity_id: sensor.light_sensor_1__darkness
+      state: 'true'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: light.gallerie
+
+- alias: hue_sensor_on_treppe
   trigger:
     - platform: mqtt
       topic: hue/motionsensor_3_companion/status
@@ -16,16 +29,17 @@
     - service: homeassistant.turn_on
       entity_id: input_boolean.motion_detected_mode
 
-- alias: hue_sensor
+- alias: hue_sensor_off
   trigger:
     - platform: mqtt
       topic: hue/motionsensor_3_companion/status
       payload: '0'
-  condition:
+  action:
+    - service: homeassistant.turn_off
+      entity_id: light.gallerie
     - condition: state
       entity_id: input_boolean.motion_detected_mode
       state: 'on'
-  action:
     - service: homeassistant.turn_off
       entity_id: light.treppe
     - service: homeassistant.turn_off
