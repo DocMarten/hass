@@ -6,10 +6,10 @@
   condition:
     - condition: state
       entity_id: sensor.light_sensor_1__darkness
-      state: true
+      state: 'true'
     - condition: state
       entity_id: light.treppe
-      state: off
+      state: 'off'
   action:
     - service: homeassistant.turn_on
       entity_id: light.treppe
@@ -23,11 +23,8 @@
       payload: '0'
   condition:
     - condition: state
-      entity_id: sensor.light_sensor_1__darkness
-      state: true
-    - condition: state
       entity_id: input_boolean.motion_detected_mode
-      state: On
+      state: 'on'
   action:
     - service: homeassistant.turn_off
       entity_id: light.treppe
