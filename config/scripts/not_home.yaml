@@ -1,0 +1,45 @@
+away_light:
+  alias: Away light script
+  sequence:
+    - delay: '0:{{ (range(1, 59)|random|int) }}'
+    - alias: Light on
+      service: light.hue_activate_scene
+      data:
+        group_name: "Couch"
+        scene_name: "Entspannen"
+    - alias: away mode light is on
+      service: homeassistant.turn_on
+      data:
+        entity_id: input_boolean.away_light
+    - alias: activate away light off trigger
+      service: script.turn_on
+      data:
+        entity_id: script.away_light_off_trigger_on
+    - delay: '{{ (range(0, 2)|random|int) }}:{{ (range(1, 59)|random|int) }}'
+    - alias: Light off
+      service: homeassistant.turn_off
+      data:
+        entity_id: group.all_lights
+    - alias: away mode light is on
+      service: homeassistant.turn_off
+      data:
+        entity_id: input_boolean.away_light
+    - alias: deactivate away light off trigger
+      service: script.turn_on
+      data:
+        entity_id: script.away_light_off_trigger_off
+    - alias: loop_away_light
+      service: script.turn_on
+      data:
+        entity_id: script.away_light
+away_light_off_automations:
+   alias: Away light trigger script off
+   sequence:
+     - alias: Away light off by presence - script
+       service_template: automation.turn_{% if states.input_boolean.away_light.state == "on" %}off{% else %}on{% endif %}
+       data:
+         entity_id: automation.away_light_off_by_presence
+     - alias: Away light off by time - script
+       service_template: automation.turn_{% if states.input_boolean.away_light.state == "on" %}off{% else %}on{% endif %}
+       data:
+         entity_id: automation.away_light_off_by_time

@@ -1,0 +1,25 @@
+- platform: yr
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - humidity
+    - cloudiness
+    - dewpointTemperature
+- platform: rest
+  resource: http://192.168.1.2/api/-gXCgEd1seiz4tu9nPNt9-b3WLr2wRLeUAb8iMah/sensors/4
+  value_template: '{{ value_json.state.lightlevel }}'
+  scan_interval: 60
+      unit_of_measurement: Lux
+  name: 'Living Room Lux'
+- platform: rest
+  resource: http://192.168.1.2/api/-gXCgEd1seiz4tu9nPNt9-b3WLr2wRLeUAb8iMah/sensors/2
+  value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+  unit_of_measurement: °C
+  name: 'Living Room Temperature'
+- platform: rest
+  resource: http://192.168.1.2/api/-gXCgEd1seiz4tu9nPNt9-b3WLr2wRLeUAb8iMah/sensors/5
+  value_template: '{{ value_json.state.status}}'
+  scan_interval: 2
+  name: 'Living Room Motion'

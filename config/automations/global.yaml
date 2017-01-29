@@ -1,0 +1,9 @@
+- alias: Turn on automation
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      after: '00:00:00'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.automation

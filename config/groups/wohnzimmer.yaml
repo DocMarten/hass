@@ -1,0 +1,6 @@
+wohnzimmer:
+  name: Wohnzimmer
+  view: yes
+  entities:
+    - light.couch
+    - light.treppe

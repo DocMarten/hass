@@ -1,0 +1,55 @@
+- alias: away_light_on
+  initial_state: True
+  hide_entity: False
+  trigger:
+    - platform: time
+      minutes: '/5'
+      seconds: 0
+    - platform: sun
+      event: sunset
+      offset: '-00:30:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '-00:00:00'
+      - condition: state
+        entity_id: light.couch
+        state: 'off'
+      - condition: state
+        entity_id: group.all_devices
+        state: 'not_home'
+        for:
+          hours: 1
+  action:
+    - service: script.turn_on
+      entity_id: script.away_light
+- alias: away_light_off_by_presence
+  initial_state: False
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: group.all_devices
+    from: 'not_home'
+    to: 'home'
+    state: 'home'
+  action:
+    - service: script.turn_off
+      entity_id: script.away_light
+    - service: script.turn_on
+      entity_id: script.away_light_off_automations
+- alias: away_light_off_by_time
+  initial_state: False
+  hide_entity: False
+  trigger:
+    platform: time
+    after: '23:00:00'
+  action:
+    - delay: '0:{{ (range(1, 30)|random|int) }}'
+    - service: script.turn_off
+      entity_id: script.away_light
+    - service: homeassistant.turn_off
+      entity_id: group.all_lights
+    - service: script.turn_on
+      entity_id: script.away_light_off_automations
