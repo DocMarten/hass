@@ -1,7 +1,7 @@
-- away_mode:
+away_mode:
   name: away light active
   icon: mdi:security
-- automation_mode:
+automation_mode:
   name: light automation active
   initial: on
   icon: mdi:settings
