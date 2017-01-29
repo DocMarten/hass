@@ -60,7 +60,7 @@ sensor: !include config/sensors.yaml
 
 device_tracker: !include config/device_tracker.yaml
 
-group: !include_dir_list config/groups/
+group: !include_dir_merge_named config/groups/
 
 input_boolean: !include_dir_merge_named config/input_boolean/
 

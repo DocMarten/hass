@@ -1,5 +1,4 @@
-- wohnzimmer:
-  name: Wohnzimmer
+Wohnzimmer:
   view: yes
   entities:
     - light.couch

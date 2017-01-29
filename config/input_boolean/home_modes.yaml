@@ -1,5 +1,6 @@
 away_mode:
   name: away light active
+  initial: off
   icon: mdi:security
 automation_mode:
   name: light automation active

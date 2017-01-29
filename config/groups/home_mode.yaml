@@ -1,4 +1,4 @@
-- home_modes:
+home_modes:
   control: hidden
   entities:
     - input_boolean.away_mode
