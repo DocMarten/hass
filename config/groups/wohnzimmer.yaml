@@ -1,5 +1,5 @@
 Wohnzimmer:
-  view: yes
+  view: no
   entities:
     - light.couch
     - light.treppe

@@ -1,0 +1,6 @@
+Lights:
+  view: yes
+  entities:
+    - light.couch
+    - light.treppe
+    - light.gallerie
