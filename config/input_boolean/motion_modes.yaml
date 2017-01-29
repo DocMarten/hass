@@ -1,0 +1,4 @@
+motion_detected_mode:
+  name: motion detected
+  initial: off
+  icon: mdi:security

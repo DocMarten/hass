@@ -1,0 +1,35 @@
+- alias: hue_sensor
+  trigger:
+    - platform: mqtt
+      topic: motionsensor_3_companion
+      payload: '1'
+  condition:
+    - condition: state
+      entity_id: sensor.light_sensor_1__darkness
+      state: true
+    - condition: state
+      entity_id: light.treppe
+      state: off
+  action:
+    - service: homeassistant.turn_on
+      entity_id: light.treppe
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.motion_detected_mode
+
+- alias: hue_sensor
+  trigger:
+    - platform: mqtt
+      topic: motionsensor_3_companion
+      payload: '0'
+  condition:
+    - condition: state
+      entity_id: sensor.light_sensor_1__darkness
+      state: true
+    - condition: state
+      entity_id: input_boolean.motion_detected_mode
+      state: On
+  action:
+    - service: homeassistant.turn_off
+      entity_id: light.treppe
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.motion_detected_mode
