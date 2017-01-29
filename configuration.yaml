@@ -52,7 +52,7 @@ mqtt:
 
 sensor: !include config/sensors.yaml
 
-device_tracker: !include config/sensors.yaml
+device_tracker: !include config/device_tracker.yaml
 
 group: !include_dir_list config/groups/
 
