@@ -7,39 +7,37 @@ away_light:
       data:
         group_name: "Couch"
         scene_name: "Entspannen"
-    - alias: away mode light is on
-      service: homeassistant.turn_on
-      data:
-        entity_id: input_boolean.away_light
     - alias: activate away light off trigger
       service: script.turn_on
       data:
-        entity_id: script.away_light_off_trigger_on
+        entity_id: script.away_light_toggle_automations
     - delay: '{{ (range(0, 2)|random|int) }}:{{ (range(1, 59)|random|int) }}'
     - alias: Light off
       service: homeassistant.turn_off
       data:
         entity_id: group.all_lights
-    - alias: away mode light is on
-      service: homeassistant.turn_off
-      data:
-        entity_id: input_boolean.away_light
     - alias: deactivate away light off trigger
       service: script.turn_on
       data:
-        entity_id: script.away_light_off_trigger_off
+        entity_id: script.away_light_toggle_automations
     - alias: loop_away_light
       service: script.turn_on
       data:
         entity_id: script.away_light
-away_light_off_automations:
-   alias: Away light trigger script off
-   sequence:
-     - alias: Away light off by presence - script
-       service_template: automation.turn_{% if states.input_boolean.away_light.state == "on" %}off{% else %}on{% endif %}
-       data:
-         entity_id: automation.away_light_off_by_presence
-     - alias: Away light off by time - script
-       service_template: automation.turn_{% if states.input_boolean.away_light.state == "on" %}off{% else %}on{% endif %}
-       data:
-         entity_id: automation.away_light_off_by_time
+
+away_light_toggle_automations:
+  # toggle away_mode and switch on/off away_light_off_* scripts
+  alias: Away light trigger script off
+  sequence:
+    - alias:
+      service_template: homeassistant.turn_{% if states.input_boolean.away_mode.state == "on" %}off{% else %}on{% endif %}
+      data:
+        entity_id: input_boolean.away_mode
+    - alias: Away light off by presence - script
+      service_template: automation.turn_{% if states.input_boolean.away_mode.state == "on" %}on{% else %}off{% endif %}
+      data:
+        entity_id: automation.away_light_off_by_presence
+    - alias: Away light off by time - script
+      service_template: automation.turn_{% if states.input_boolean.away_mode.state == "on" %}on{% else %}off{% endif %}
+      data:
+        entity_id: automation.away_light_off_by_time

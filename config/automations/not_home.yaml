@@ -38,18 +38,18 @@
     - service: script.turn_off
       entity_id: script.away_light
     - service: script.turn_on
-      entity_id: script.away_light_off_automations
+      entity_id: script.away_light_toggle_automations
 - alias: away_light_off_by_time
   initial_state: False
   hide_entity: False
   trigger:
     platform: time
-    after: '23:00:00'
+    after: '22:00:00'
   action:
-    - delay: '0:{{ (range(1, 30)|random|int) }}'
+    - delay: '{{ (range(0, 1)|random|int) }}:{{ (range(0, 30)|random|int) }}'
     - service: script.turn_off
       entity_id: script.away_light
+    - service: script.turn_on
+      entity_id: script.away_light_toggle_automations
     - service: homeassistant.turn_off
       entity_id: group.all_lights
-    - service: script.turn_on
-      entity_id: script.away_light_off_automations
