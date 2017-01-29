@@ -29,8 +29,17 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
+recorder:
+  purge_days: 5
+
 # Enables support for tracking state changes over time.
 history:
+  exclude:
+    entities:
+      - light.hue_color_lamp_1
+      - light.hue_color_lamp_2
+      - light.hue_color_lamp_3
+      - light.hue_lightstrip_plus_1
 
 # View all events in a logbook
 logbook:
