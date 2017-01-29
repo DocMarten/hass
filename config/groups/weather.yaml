@@ -4,7 +4,7 @@ Weather:
     - sensor.yr_temperature
     - sensor.yr_symbol
     - sensor.yr_precipitation
-    - sensor.yr_windSpeed
+    - sensor.yr_wind_speed
     - sensor.yr_humidity
     - sensor.yr_cloudiness
-    - sensor.yr_dewpointTemperature
+    - sensor.yr_dewpoint_temperature
