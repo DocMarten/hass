@@ -62,8 +62,8 @@ mqtt:
   broker: 127.0.0.1
   port: 1883
   client_id: home-assistant-1
-  username: pi
-  password: raspberry
+  username: !secret mqtt.username
+  password: !secret mqtt.password
 
 sensor: !include config/sensors.yaml
 
