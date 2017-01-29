@@ -1,4 +1,4 @@
-wohnzimmer:
+- wohnzimmer:
   name: Wohnzimmer
   view: yes
   entities:
