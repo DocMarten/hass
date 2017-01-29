@@ -34,6 +34,12 @@ history:
 
 # View all events in a logbook
 logbook:
+  exclude:
+    entities:
+      - light.hue_color_lamp_1
+      - light.hue_color_lamp_2
+      - light.hue_color_lamp_3
+      - light.hue_lightstrip_plus_1
 
 # Track the sun
 sun:
@@ -56,15 +62,7 @@ device_tracker: !include config/device_tracker.yaml
 
 group: !include_dir_list config/groups/
 
-
-input_boolean:
-  away_light:
-    name: away light active
-    icon: mdi:security
-  automation:
-    name: light automation active
-    initial: on
-    icon: mdi:settings
+input_boolean: !include_dir_list config/input_boolean/
 
 automation: !include_dir_merge_list config/automations/
 

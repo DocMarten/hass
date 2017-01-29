@@ -1,0 +1,4 @@
+- Family:
+  entities:
+    - device_tracker.toni
+    - device_tracker.marten

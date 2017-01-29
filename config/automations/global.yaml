@@ -6,4 +6,4 @@
       after: '00:00:00'
   action:
     - service: homeassistant.turn_on
-      entity_id: input_boolean.automation
+      entity_id: input_boolean.automation_mode
