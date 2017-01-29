@@ -1,0 +1,8 @@
+- alias: hue_sensor
+  trigger:
+    - platform: mqtt
+      topic: hue/sensor/presence
+      payload: 'true'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: light.couch
