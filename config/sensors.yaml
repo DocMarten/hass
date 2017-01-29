@@ -7,19 +7,17 @@
     - humidity
     - cloudiness
     - dewpointTemperature
-- platform: rest
-  resource: http://192.168.1.2/api/-gXCgEd1seiz4tu9nPNt9-b3WLr2wRLeUAb8iMah/sensors/4
-  value_template: '{{ value_json.state.lightlevel }}'
+- platform: mqtt
+  state_topic: 'hue/hue_ambient_light_sensor_1/lightlevel'
   scan_interval: 60
   unit_of_measurement: Lux
   name: 'Living Room Lux'
-- platform: rest
-  resource: http://192.168.1.2/api/-gXCgEd1seiz4tu9nPNt9-b3WLr2wRLeUAb8iMah/sensors/2
-  value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+- platform: mqtt
+  state_topic: 'hue/hue_temperature_sensor_1/temperatur'
+  value_template: '{{ round(-1) | float / 100 }}'
+  scan_interval: 60
   unit_of_measurement: °C
   name: 'Living Room Temperature'
-- platform: rest
-  resource: http://192.168.1.2/api/-gXCgEd1seiz4tu9nPNt9-b3WLr2wRLeUAb8iMah/sensors/5
-  value_template: '{{ value_json.state.status}}'
-  scan_interval: 2
-  name: 'Living Room Motion'
+- platform: mqtt
+  state_topic: 'hue/hue_ambient_light_sensor_1/dark'
+  name: 'light sensor 1 - darkness'
